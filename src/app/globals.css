@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #070b14;
+  --color-surface: #0d1424;
+  --color-surface2: #121b2f;
+  --color-line: #1d2a44;
+  --color-line2: #2a3a5c;
+  --color-ink: #e8edf6;
+  --color-mut: #8b95ab;
+  --color-dim: #5a6478;
+  --color-brand: #ea4647;
+  --color-brand2: #ff6b6b;
+  --color-ok: #34d399;
+  --color-warn: #fbbf24;
+  --color-bad: #f87171;
+  --color-info: #38bdf8;
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: rgba(234, 70, 71, 0.35);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* subtle grid backdrop for hero sections */
+.hero-grid {
+  background-image: linear-gradient(rgba(56, 122, 223, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 122, 223, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* thin scrollbars for panels */
+.panel-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.panel-scroll::-webkit-scrollbar-thumb {
+  background: #1d2a44;
+  border-radius: 4px;
+}
