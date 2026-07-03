@@ -21,18 +21,22 @@ export default function CompanySearch({ watchedCodes }: { watchedCodes: string[]
   const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
-    }
-    const t = setTimeout(async () => {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-      if (res.ok) {
-        const data = (await res.json()) as { results: Result[] };
-        setResults(data.results);
-        setOpen(true);
-      }
-    }, 250);
+    const q = query.trim();
+    const t = setTimeout(
+      async () => {
+        if (!q) {
+          setResults([]);
+          return;
+        }
+        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        if (res.ok) {
+          const data = (await res.json()) as { results: Result[] };
+          setResults(data.results);
+          setOpen(true);
+        }
+      },
+      q ? 250 : 0,
+    );
     return () => clearTimeout(t);
   }, [query]);
 
