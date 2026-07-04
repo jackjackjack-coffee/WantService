@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>다트워치 (DartWatch)</h1>
+<h1>공시레이더 (Gongsi Radar)</h1>
 
 <p><b>거래처가 무너지기 전에, 공시가 먼저 말해줍니다.</b></p>
 <p>DART 전자공시 기반 거래처·투자기업 재무 리스크 모니터링 SaaS</p>
@@ -13,7 +13,7 @@
 
 거래처 하나의 부실은 어음·매출채권을 타고 내 회사의 유동성 위기가 됩니다. 부실의 전조 — 반복되는 유상증자, 감사범위 한정, 소송, 최대주주 변경 — 는 항상 **DART 공시에 먼저 기록**됩니다.
 
-다트워치는 관심기업(거래처·투자 종목)을 등록해두면:
+공시레이더는 관심기업(거래처·투자 종목)을 등록해두면:
 
 1. **재무건전성 20단계 등급 (AAA~D)** — 수익성·재무구조·현금창출력·추세 4축을 신용평가 방법론(선형 보간 스코어카드)으로 채점, 1년 부도확률 추정치와 등급 전망까지 제공
 2. **위험 공시 자동 태깅** — 부도·회생·감사의견·유상증자·소송 등 18종 리스크 패턴으로 공시 제목을 분류, 위험 공시는 등급에 즉시 반영
@@ -59,7 +59,7 @@ src/
 
 본 서비스는 오픈소스 [dartlab](https://github.com/eddmpython/dartlab) (Apache-2.0) 의 개념과 방법론을 서비스 형태로 이식한 것입니다.
 
-| dartlab 원본 | 다트워치 이식 |
+| dartlab 원본 | 공시레이더 이식 |
 |---|---|
 | `dartlab-lite/client.py` (OpenDART 클라이언트) | `src/lib/opendart.ts` |
 | `credit/scoring/creditScorecard.py` (scoreMetric·weightedScore) | `src/lib/scorecard.ts` |
@@ -89,8 +89,8 @@ cp .env.example .env.local
 ### Docker 배포
 
 ```bash
-docker build -t dartwatch .
-docker run -p 3000:3000 -v dartwatch-data:/app/data --env-file .env.local dartwatch
+docker build -t gongsi-radar .
+docker run -p 3000:3000 -v gongsi-radar-data:/app/data --env-file .env.local gongsi-radar
 ```
 
 ## 로드맵

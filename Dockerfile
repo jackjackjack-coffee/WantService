@@ -1,4 +1,4 @@
-# 다트워치 — 단일 컨테이너 배포 (SQLite 파일 DB 는 /app/data 볼륨에 저장)
+# 공시레이더 — 단일 컨테이너 배포 (SQLite 파일 DB 는 /app/data 볼륨에 저장)
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./

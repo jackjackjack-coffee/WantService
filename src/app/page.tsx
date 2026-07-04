@@ -62,7 +62,7 @@ export default async function LandingPage() {
             </h1>
             <p className="mt-5 max-w-lg text-lg text-mut">
               유상증자, 감사의견, 소송, 회생절차 — 부도의 전조는 항상 공시에 먼저 나타납니다.
-              다트워치는 거래처·투자기업의 재무건전성을 20단계 등급으로 채점하고, 위험 공시를 자동으로 태깅해 알려드립니다.
+              공시레이더는 거래처·투자기업의 재무건전성을 20단계 등급으로 채점하고, 위험 공시를 자동으로 태깅해 알려드립니다.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/signup" className="rounded-lg bg-brand px-6 py-3 font-semibold text-white hover:bg-brand2">
@@ -128,7 +128,7 @@ export default async function LandingPage() {
           {[
             ["연쇄 부도의 시작", "거래처 하나의 부실이 어음·매출채권을 타고 내 회사의 유동성 위기가 됩니다. 신호는 늦게 오지 않았습니다 — 늦게 봤을 뿐입니다."],
             ["공시는 이미 말하고 있다", "유상증자 반복, 감사범위 한정, 소송, 최대주주 변경. 부실 기업의 전형적 경로는 DART 공시에 순서대로 기록됩니다."],
-            ["비싼 신용정보의 대안", "기업 신용정보 서비스는 연 수백만 원. 다트워치는 공개 데이터인 전자공시를 자동 분석해 월 커피 몇 잔 값으로 제공합니다."],
+            ["비싼 신용정보의 대안", "기업 신용정보 서비스는 연 수백만 원. 공시레이더는 공개 데이터인 전자공시를 자동 분석해 월 커피 몇 잔 값으로 제공합니다."],
           ].map(([title, body]) => (
             <div key={title}>
               <h3 className="mb-2 font-semibold text-brand2">{title}</h3>
@@ -237,7 +237,7 @@ export default async function LandingPage() {
         </Link>
       </section>
       <footer className="border-t border-line py-8 text-center text-xs leading-relaxed text-dim">
-        <p>다트워치 · 데이터 출처: 금융감독원 전자공시시스템(DART) · 분석 엔진: dartlab (Apache-2.0) 이식</p>
+        <p>공시레이더 · 데이터 출처: 금융감독원 전자공시시스템(DART) · 분석 엔진: dartlab (Apache-2.0) 이식</p>
         <p className="mt-1">본 서비스가 제공하는 등급·점수·시그널은 참고용 추정치로, 투자 권유나 신용 평가 결과가 아닙니다.</p>
       </footer>
     </div>

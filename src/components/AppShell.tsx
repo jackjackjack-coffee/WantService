@@ -60,7 +60,7 @@ export default function AppShell({
       </header>
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
       <footer className="border-t border-line py-6 text-center text-xs text-dim">
-        다트워치 — DART 전자공시 기반 재무 리스크 모니터링. 본 서비스의 등급·점수는 참고용 추정치이며 투자·신용 판단의 근거가 아닙니다.
+        공시레이더 — DART 전자공시 기반 재무 리스크 모니터링. 본 서비스의 등급·점수는 참고용 추정치이며 투자·신용 판단의 근거가 아닙니다.
       </footer>
     </div>
   );

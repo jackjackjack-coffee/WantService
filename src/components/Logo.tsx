@@ -4,10 +4,10 @@ export default function Logo({ href = "/" }: { href?: string }) {
   return (
     <Link href={href} className="flex items-center gap-2 font-bold text-lg tracking-tight">
       <span className="grid size-7 place-items-center rounded-lg bg-brand text-white text-sm font-black">
-        다
+        공
       </span>
       <span>
-        다트워치<span className="text-brand">.</span>
+        공시레이더<span className="text-brand">.</span>
       </span>
     </Link>
   );

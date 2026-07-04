@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   return NextResponse.json({
     orderId,
     amount: plan.price,
-    orderName: `다트워치 ${plan.name} 1개월`,
+    orderName: `공시레이더 ${plan.name} 1개월`,
     customerName: user.name,
     customerEmail: user.email,
   });

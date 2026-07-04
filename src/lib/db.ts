@@ -1,5 +1,5 @@
 // SQLite 데이터 계층 — 사용자/관심기업/알림/결제 + OpenDART 응답 캐시.
-// 파일 DB(data/dartwatch.db) 라 VPS·Docker 단일 인스턴스 배포에 적합. (스케일아웃 시 Postgres 전환)
+// 파일 DB(data/gongsi-radar.db) 라 VPS·Docker 단일 인스턴스 배포에 적합. (스케일아웃 시 Postgres 전환)
 
 import Database from "better-sqlite3";
 import { mkdirSync } from "node:fs";
@@ -11,7 +11,7 @@ export function db(): Database.Database {
   if (_db) return _db;
   const dir = path.join(process.cwd(), "data");
   mkdirSync(dir, { recursive: true });
-  _db = new Database(path.join(dir, "dartwatch.db"));
+  _db = new Database(path.join(dir, "gongsi-radar.db"));
   _db.pragma("journal_mode = WAL");
   _db.exec(`
     CREATE TABLE IF NOT EXISTS users (

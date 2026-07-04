@@ -1,4 +1,4 @@
-// 다트워치 도메인 타입 — dartlab 의 Company/panel/credit 개념을 서비스 형태로 옮긴 것.
+// 공시레이더 도메인 타입 — dartlab 의 Company/panel/credit 개념을 서비스 형태로 옮긴 것.
 
 export type Severity = "critical" | "warning" | "positive";
 
