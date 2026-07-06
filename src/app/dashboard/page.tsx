@@ -81,44 +81,48 @@ export default async function DashboardPage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => (
-            <Link
+            <div
               key={c.code}
-              href={`/company/${c.code}`}
-              className="group rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-line2"
+              className="group rounded-2xl border border-line bg-surface transition-colors hover:border-line2"
             >
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="num text-xs text-dim">
-                    {c.code}
-                    {c.demo && <span className="ml-1.5 rounded bg-warn/10 px-1 text-[10px] text-warn">데모</span>}
-                  </p>
-                  <p className="truncate text-lg font-semibold group-hover:text-brand2">{c.name}</p>
-                </div>
-                {c.health && <GradeBadge grade={c.health.grade} />}
-              </div>
-
-              {c.health ? (
-                <>
-                  <div className="mt-3 flex items-center gap-3 text-xs text-mut">
-                    <span className="num">위험점수 {Math.round(c.health.riskScore)}</span>
-                    <span>전망 {c.health.outlook}</span>
-                    {c.alertCount > 0 && (
-                      <span className="ml-auto rounded-full bg-bad/15 px-2 py-0.5 font-semibold text-bad">
-                        알림 {c.alertCount}
-                      </span>
-                    )}
+              {/* 링크 안에 버튼을 중첩하면 잘못된 HTML — 카드 본문만 링크로 감싼다 */}
+              <Link href={`/company/${c.code}`} className="block p-5 pb-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="num text-xs text-dim">
+                      {c.code}
+                      {c.demo && <span className="ml-1.5 rounded bg-warn/10 px-1 text-[10px] text-warn">데모</span>}
+                    </p>
+                    <p className="truncate text-lg font-semibold group-hover:text-brand2">{c.name}</p>
                   </div>
-                  <p className="mt-3 line-clamp-2 text-sm text-mut">{c.health.signals[0]}</p>
-                </>
-              ) : (
-                <p className="mt-3 text-sm text-dim">재무 데이터를 불러올 수 없습니다.</p>
-              )}
+                  {c.health && <GradeBadge grade={c.health.grade} />}
+                </div>
 
-              <div className="mt-4 flex items-center justify-between border-t border-line/60 pt-3">
-                <span className="text-xs text-info">상세 분석 →</span>
+                {c.health ? (
+                  <>
+                    <div className="mt-3 flex items-center gap-3 text-xs text-mut">
+                      <span className="num">위험점수 {Math.round(c.health.riskScore)}</span>
+                      <span>전망 {c.health.outlook}</span>
+                      {c.alertCount > 0 && (
+                        <span className="ml-auto rounded-full bg-bad/15 px-2 py-0.5 font-semibold text-bad">
+                          알림 {c.alertCount}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-3 line-clamp-2 text-sm text-mut">{c.health.signals[0]}</p>
+                  </>
+                ) : (
+                  <p className="mt-3 text-sm text-dim">재무 데이터를 불러올 수 없습니다.</p>
+                )}
+              </Link>
+
+              <div className="mx-5 mt-4 flex items-center justify-between border-t border-line/60 py-3">
+                <Link href={`/company/${c.code}`} className="text-xs text-info hover:underline">
+                  상세 분석 →
+                </Link>
                 <RemoveWatchButton code={c.code} />
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}

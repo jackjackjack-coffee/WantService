@@ -12,8 +12,12 @@ export function RemoveWatchButton({ code }: { code: string }) {
         e.preventDefault();
         e.stopPropagation();
         setBusy(true);
-        await fetch(`/api/watchlist?code=${code}`, { method: "DELETE" });
-        router.refresh();
+        try {
+          await fetch(`/api/watchlist?code=${encodeURIComponent(code)}`, { method: "DELETE" });
+          router.refresh();
+        } finally {
+          setBusy(false);
+        }
       }}
       disabled={busy}
       className="text-xs text-dim transition-colors hover:text-bad disabled:opacity-50"
@@ -31,9 +35,12 @@ export function MarkAlertsReadButton() {
     <button
       onClick={async () => {
         setBusy(true);
-        await fetch("/api/alerts/read", { method: "POST" });
-        router.refresh();
-        setBusy(false);
+        try {
+          await fetch("/api/alerts/read", { method: "POST" });
+          router.refresh();
+        } finally {
+          setBusy(false);
+        }
       }}
       disabled={busy}
       className="rounded border border-line px-3 py-1.5 text-xs text-mut transition-colors hover:text-ink disabled:opacity-50"

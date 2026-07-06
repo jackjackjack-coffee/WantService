@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { safeNextPath } from "@/lib/safe-path";
 
 export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const router = useRouter();
@@ -21,19 +22,23 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
     };
     if (mode === "signup") body.name = String(form.get("name") ?? "");
 
-    const res = await fetch(`/api/auth/${mode}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) {
-      router.push(params.get("next") ?? "/dashboard");
-      router.refresh();
-    } else {
+    try {
+      const res = await fetch(`/api/auth/${mode}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        router.push(safeNextPath(params.get("next")));
+        router.refresh();
+        return; // 이동 중 — busy 유지
+      }
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       setError(data.error ?? "요청에 실패했습니다.");
-      setBusy(false);
+    } catch {
+      setError("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
+    setBusy(false);
   }
 
   const input =
