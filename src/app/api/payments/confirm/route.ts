@@ -39,18 +39,31 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "결제 금액이 주문과 일치하지 않습니다." }, { status: 400 });
   }
 
-  const res = await fetch("https://api.tosspayments.com/v1/payments/confirm", {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${Buffer.from(`${secretKey}:`).toString("base64")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ paymentKey, orderId, amount }),
-  });
+  let res: Response;
+  try {
+    res = await fetch("https://api.tosspayments.com/v1/payments/confirm", {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${secretKey}:`).toString("base64")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ paymentKey, orderId, amount }),
+      signal: AbortSignal.timeout(15_000),
+    });
+  } catch {
+    // 네트워크 실패 — 승인 여부를 알 수 없으므로 상태를 바꾸지 않는다 (재시도 가능하게 PENDING 유지)
+    return NextResponse.json(
+      { error: "결제 승인 요청이 실패했습니다. 잠시 후 다시 시도해주세요." },
+      { status: 502 },
+    );
+  }
 
   if (!res.ok) {
     const err = (await res.json().catch(() => ({}))) as { message?: string };
-    completePayment(orderId, paymentKey, "FAILED");
+    // 동시 요청이 먼저 승인을 끝냈을 수 있다 — DONE 을 FAILED 로 덮어쓰지 않는다.
+    if (findPayment(orderId)?.status !== "DONE") {
+      completePayment(orderId, paymentKey, "FAILED");
+    }
     return NextResponse.json({ error: err.message || "결제 승인에 실패했습니다." }, { status: 502 });
   }
 

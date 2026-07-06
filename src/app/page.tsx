@@ -50,12 +50,13 @@ export default async function LandingPage() {
       {/* ── 히어로 ── */}
       <section className="hero-grid border-b border-line">
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-20 lg:grid-cols-2 lg:items-center">
-          <div>
+          {/* min-w-0: 데모 카드의 nowrap 요소가 모바일에서 그리드 트랙을 밀어내지 않게 */}
+          <div className="min-w-0">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-line2 bg-surface px-3 py-1 text-xs text-mut">
               <span className="size-1.5 rounded-full bg-ok" />
               DART 전자공시 기반 · dartlab 오픈소스 분석 엔진
             </p>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+            <h1 className="break-keep text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
               거래처가 무너지기 전에,
               <br />
               <span className="text-brand">공시가 먼저</span> 말해줍니다
@@ -76,7 +77,7 @@ export default async function LandingPage() {
           </div>
 
           {/* 데모 카드 — 평가 엔진 실제 출력 */}
-          <div className="space-y-3">
+          <div className="min-w-0 space-y-3">
             <div className="rounded-2xl border border-bad/30 bg-surface p-5 shadow-2xl shadow-black/40">
               <div className="flex items-center justify-between">
                 <div>
@@ -97,7 +98,7 @@ export default async function LandingPage() {
                     return (
                       <div key={f.title} className="flex items-center gap-2 rounded-lg border border-line bg-bg/60 px-3 py-2 text-sm">
                         <SeverityBadge severity={tag.severity} label={tag.label} />
-                        <span className="flex-1 truncate text-mut">{f.title}</span>
+                        <span className="min-w-0 flex-1 truncate text-mut">{f.title}</span>
                         <span className="num text-xs text-dim">{f.date.slice(5).replace("-", ".")}</span>
                       </div>
                     );

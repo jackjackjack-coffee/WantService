@@ -15,6 +15,12 @@ import type { PanelTopic } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
+export async function generateMetadata(props: PageProps<"/company/[code]">) {
+  const { code } = await props.params;
+  const company = await getCompanyData(code).catch(() => null);
+  return { title: company ? `${company.name} 리스크 분석` : "기업 분석" };
+}
+
 const TOPICS: { key: PanelTopic; label: string }[] = [
   { key: "IS", label: "손익계산서" },
   { key: "BS", label: "재무상태표" },
@@ -75,8 +81,8 @@ export default async function CompanyPage(props: PageProps<"/company/[code]">) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-5">
-        {/* 좌측: 추이 + 재무제표 */}
-        <div className="space-y-6 lg:col-span-3">
+        {/* 좌측: 추이 + 재무제표 — min-w-0 이 없으면 차트·표의 최소 폭이 모바일 그리드를 밀어낸다 */}
+        <div className="min-w-0 space-y-6 lg:col-span-3">
           <section className="rounded-2xl border border-line bg-surface p-5">
             <h2 className="mb-4 font-semibold">매출·영업이익 추이</h2>
             <TrendChart years={company.years} />
@@ -100,7 +106,7 @@ export default async function CompanyPage(props: PageProps<"/company/[code]">) {
         </div>
 
         {/* 우측: 건전성 분석 + 공시 */}
-        <div className="space-y-6 lg:col-span-2">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           <section className="rounded-2xl border border-line bg-surface p-5">
             <h2 className="mb-1 font-semibold">건전성 4축 분석</h2>
             <p className="mb-4 text-xs text-dim">

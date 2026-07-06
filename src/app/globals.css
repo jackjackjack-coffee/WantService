@@ -20,6 +20,13 @@
     "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
 }
 
+/* 랜딩 앵커(#features 등) 이동을 부드럽게 — 모션 축소 설정은 존중 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-ink);
